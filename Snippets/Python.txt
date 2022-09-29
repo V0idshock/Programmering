@@ -1,0 +1,6 @@
+# finder mængden af substrings (også overlappende) af typen needle i Stringet haystack
+num = 0
+i = 0
+while i <= length:
+   num += haystack.count(needle, i, i + len(needle))
+   i += 1
