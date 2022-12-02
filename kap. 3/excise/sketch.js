@@ -13,3 +13,4 @@ function draw() {
   rotateX(frameCount/100);
   rotateY(frameCount/100);
 box(100,100,100);
+}
