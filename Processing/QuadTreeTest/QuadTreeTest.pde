@@ -75,7 +75,7 @@ class QuadTree {
   }
   
   void show() {
-    stroke(0);
+    stroke(255);
     strokeWeight(1);
     noFill();
     rectMode(CENTER);
@@ -95,6 +95,7 @@ class QuadTree {
 
 void setup() {
   size(400,400);
+  background(0);
   Rectangle boundary = new Rectangle(200,200,200,200);
   QuadTree qt = new QuadTree(boundary, 1);
   

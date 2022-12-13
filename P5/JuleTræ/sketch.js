@@ -1,19 +1,18 @@
-let tree = [];
+kree = [];
 function setup() {
   createCanvas(windowWidth, windowHeight);
   translate(width/2, height/2);
-  tree = new Tree(0,200,200,200,0,3);
-  for(let i = 0; i < 5; i++) {
-    tree.push(new Tree(0,200,100,200,0,0));
+  for(let i = 0; i < 50; i++) {
+    kree.push(new Tree(0,200,100,200,0,3));
   }
 }
 
 function draw() {
   translate(width/2, height/2);
   background(220);
-  for(let i = 0; i < tree.length; i++) {
-    tree[i].x += random(-10,10), tree.y += random(-10,10);
-    tree[i].draw();
+  for(let i = 0; i < kree.length; i++) {
+    kree[i].move(10);
+    kree[i].draw();
   }
 }
 
@@ -36,5 +35,10 @@ class Tree {
     for(let i = 0; i < this.amount; i++) {
       triangle(this.x-this.width, this.y-(i*20*this.height/50), this.x+this.width,this.y-(i*20*this.height/50),this.x,this.y-this.height-(i*20*this.height/50));
     }
+  }
+
+  move(Speed) {
+    this.x += random(-Speed, Speed);
+    this.y += random(-Speed, Speed);
   }
 }
