@@ -11,7 +11,7 @@ function setup() {
   b *= 0.001;
   c *= -10;
   stroke(255,0,0);
-  drawQuadraticLine(a,b,c,7);
+  drawQuadraticLine(a,b,c,width);
   drawRoots(a,b,d(a,b,c));
 }
 
