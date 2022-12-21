@@ -3,9 +3,9 @@ let posX, posY;
 let gameSize = 50;
 let currentPlayer = true;
 let game = [
-  ['X','',''],
-  ['','X',''],
-  ['','','X']
+  ['','',''],
+  ['','',''],
+  ['','','']
 ]
 
 function setup() {
@@ -47,10 +47,12 @@ function mousePressed(){
     for(let y = 0; y < 3; y++){
       for(let x = 0; x < 3; x++){
         if(insideSquare(mouseX, mouseY,posX+x*gameSize, posY+y*gameSize, (gameSize-5)/2)){
-          game[y][x] = playerSymbols[int(currentPlayer)];
-          currentPlayer = !currentPlayer;
-          y = 3; // to break outer loop
-          break;
+          if(game[y][x] == '') {
+            game[y][x] = playerSymbols[int(currentPlayer)];
+            currentPlayer = !currentPlayer;
+            y = 3; // to break outer loop
+            break;
+          }
         }
         else{ console.log("not in " + x + "" + y);}
       }
@@ -60,7 +62,8 @@ function mousePressed(){
 
 function insideSquare(x1,y1,x2,y2,bSize) {
   console.log("testing boundry");
-  if((x1<x2+bSize && x1>x2-bSize) && (y1<y2+bSize && y1>y2-bSize))
-  { return true; }
+  if((x1<x2+bSize && x1>x2-bSize) && (y1<y2+bSize && y1>y2-bSize)){ 
+    return true; 
+  }
   else{ return false; }
 }
