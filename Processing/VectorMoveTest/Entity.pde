@@ -17,16 +17,14 @@ class agent extends entity {
 class player extends agent{
     PVector vel = new PVector(0,0);
     float speed = 10;
-  player(float X, float Y){ super(X,Y); this.MAXHEALTH = 100;
-    this.HEALTH = 100; }
-  player(){ super(); this.MAXHEALTH = 100;
-    this.HEALTH = 100;}
+  player(float X, float Y){ super(X,Y); this.MAXHEALTH = 100; this.HEALTH = 100; }
+  player(){ super(); this.MAXHEALTH = 100; this.HEALTH = 100;}
   
     void update() {
-    if(up == true) {this.vel.y -= 2;}
-    if(down == true) {this.vel.y +=2;}
-    if(left == true) {this.vel.x -=2;}
-    if(right == true) {this.vel.x +=2;}
+    if(up) {this.vel.y -= 2;}
+    if(down) {this.vel.y +=2;}
+    if(left) {this.vel.x -=2;}
+    if(right) {this.vel.x +=2;}
     this.pos.add(this.vel.mult(0.8));
     if(this.vel.mag() > speed) { this.vel.setMag(speed); }
   }
@@ -67,7 +65,7 @@ class projectile extends entity{
   void display() { fill(0,255,0); circle(pos.x,pos.y,10); }
   
   boolean checkhit(agent PLAYER) {
-    if(dist(PLAYER.pos.x,PLAYER.pos.y, this.pos.x, this.pos.y) < 10) {
+    if(PLAYER.pos.dist(this.pos) < 10) {
       PLAYER.HEALTH -= 1;
       return true;
     }

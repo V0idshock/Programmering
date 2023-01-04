@@ -1,19 +1,21 @@
 // Image size
-int size_x = 500;
-int size_y = 500;
+int size_x = 800;
+int size_y = 800;
+float r = 0;
 
 void setup() {
-  size(500, 500);
+  size(800, 800);
   frameRate(50);
 }
 
 void draw() {
     noStroke();
+    r += 0.01;
   
   for(int x = 0; x < size_x; x++) {
    for(int y = 0; y < size_y; y++) {
-     float X = cos(HALF_PI / size_x * x );
-     float Z = sin(HALF_PI / size_x * x );
+     float X = cos(HALF_PI / size_x * x + r);
+     float Z = sin(HALF_PI / size_x * x + r);
      if(noise(X*6, Z*6, y*0.025) > 0.5){
        fill(255,255,150);
        if(noise(X*6, Z*6, y*0.025) > 0.55)

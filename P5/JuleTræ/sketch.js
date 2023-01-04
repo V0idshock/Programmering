@@ -1,20 +1,14 @@
 kree = [];
-let Bauble;
 function setup() {
   createCanvas(windowWidth, windowHeight);
-  translate(width/2, height/2);
-  Bauble = new bauble(random(width),random(height),10,color(255,0,0),);
   for(let i = 0; i < 1; i++) {
-    kree.push(new Tree(0,200,100,200,0,7));
+    kree.push(new Tree(0,200,100,150,0,3));
   }
 }
 
 function draw() {
-  translate(width/2, height/2);
   background(220);
-  //Bauble.draw();
   for(let i = 0; i < kree.length; i++) {
-    kree[i].move(10);
     kree[i].draw();
   }
 }
@@ -26,23 +20,31 @@ class Tree {
     this.width = W;
     this.height = H;
     this.ratio = Ratio;
-    this.amount = Amount;
-  }
-
-  draw() {
-    strokeWeight(3);
-    stroke(0,80,0);
-    fill(120,60,10);
-    rect(this.x-this.width/10,this.y,this.width/10*2,this.height/10);
-    fill(0,100,0);
-    for(let i = 0; i < this.amount; i++) {
-      triangle(this.x-this.width, this.y-(i*20*this.height/50), this.x+this.width,this.y-(i*20*this.height/50),this.x,this.y-this.height-(i*20*this.height/50));
+    this.baubles = [];
+    this.branches = [];
+    for (let i = 0; i < Amount; i++) {
+      this.branches.push(new Branch(this.x, this.y-(this.height*i/5),this.width,this.height));
+      colorMode(HSB);
+      for(let n = 0; n < 3; n++){
+        let H = random(this.branches[i].h);
+        let W = this.branches[i].w*(1-H/this.branches[i].h);
+        this.baubles.push(new Bauble(this.branches[i].x + this.branches[i].w/2 + random(-W/2 , W/2), this.branches[i].y - H,10,color(random(255),255,100)));
+      }
+      colorMode(RGB);
     }
   }
 
-  move(Speed) {
-    this.x += random(-Speed, Speed);
-    this.y += random(-Speed, Speed);
+  draw() {
+    noStroke();
+    fill(120,60,10);
+    rectMode(CENTER);
+    rect(this.x + this.width/2, this.y+10, 20,20);
+    for (let i = 0; i < this.branches.length; i++) {
+      this.branches[i].draw();
+    }
+    for (let i = 0; i < this.baubles.length; i++) {
+      this.baubles[i].draw();
+    }
   }
 }
 
@@ -53,7 +55,7 @@ class decoration {
   }
 }
 
-class bauble extends decoration{
+class Bauble extends decoration{
   constructor(X,Y,S, COLOR) {
     super(X,Y);
     this.Color = COLOR;
@@ -66,4 +68,19 @@ class bauble extends decoration{
     circle(this.x,this.y,this.size);
   }
 
+}
+
+class Branch {
+  constructor(X,Y,W,H) {
+    this.x = X;
+    this.y = Y;
+    this.w = W;
+    this.h = H;
+  }
+
+  draw() {
+    strokeWeight(1);
+    fill(0,100,0);
+    triangle(this.x, this.y, this.x + this.w, this.y, this.x + (this.w / 2), this.y-this.h);
+  }
 }

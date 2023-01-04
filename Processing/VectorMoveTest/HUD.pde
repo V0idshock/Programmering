@@ -25,5 +25,5 @@ void healthBar(float X, float Y, float H, float MAX) {
   fill(0);
   rect(X,Y,30,10);
   fill(255,0,0);
-  rect(X+15*((H/MAX)-1),Y,(H/MAX)*30,7);
+  rect(X+15*((H/MAX)-1),Y,(H/MAX)*30-4,6);
 }
