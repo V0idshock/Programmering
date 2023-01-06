@@ -7,6 +7,7 @@ function setup() {
 }
 
 function draw() {
+  translate(mouseX, mouseY);
   background(220);
   for(let i = 0; i < kree.length; i++) {
     kree[i].draw();
